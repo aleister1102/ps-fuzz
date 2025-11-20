@@ -44,7 +44,8 @@ setup(
         "pandas==2.2.2",
         "inquirer==3.2.4",
         "prompt-toolkit==3.0.43",
-        "fastparquet==2024.2.0"
+        "fastparquet==2024.2.0",
+        'importlib_resources>=5.12.0; python_version<"3.9"'
     ],
     extras_require={
         "dev": ["pytest==7.4.4"]

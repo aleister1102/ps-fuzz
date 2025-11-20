@@ -6,10 +6,10 @@ from ..attack_registry import register_test
 from ..util import contains_refusal_keywords
 from .utils import evaluate_response
 from typing import Generator
-import pandas as pd
-import os
-from pkg_resources import resource_filename # for loading attack data file packaged with the library
 import logging
+import os
+
+import pandas as pd
 logger = logging.getLogger(__name__)
 
 @register_test

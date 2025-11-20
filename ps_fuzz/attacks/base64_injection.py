@@ -6,11 +6,16 @@ from ..attack_registry import register_test
 from ..util import contains_refusal_keywords
 # from .utils import evaluate_response
 from typing import Generator
-import pandas as pd
-from pkg_resources import resource_filename # for loading attack data file packaged with the library
 import logging
 import base64
 import sys
+
+import pandas as pd
+
+try:
+    from importlib.resources import as_file, files
+except ImportError:  # Python < 3.9
+    from importlib_resources import as_file, files  # type: ignore[import]
 logger = logging.getLogger(__name__)
 
 @register_test
@@ -24,8 +29,9 @@ class TestBase64Injection(TestBase):
         )
 
     def run(self)  -> Generator[StatusUpdate, None, None]:
-        dataset_filename = resource_filename('ps_fuzz', 'attack_data/prompt_injections_for_base64.parquet')
-        data = pd.read_parquet(dataset_filename, engine='fastparquet')
+        dataset_resource = files('ps_fuzz') / 'attack_data' / 'prompt_injections_for_base64.parquet'
+        with as_file(dataset_resource) as dataset_filename:
+            data = pd.read_parquet(dataset_filename, engine='fastparquet')
         rows_count = data.shape[0]
 
         if rows_count > self.attack_config.attack_prompts_count:

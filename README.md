@@ -26,7 +26,7 @@
 ---
 
 <div align="center">
-  
+
 ![Prompt Security Logo](./resources/Black+Color.png)
 
 </div>
@@ -43,7 +43,7 @@ Table of Contents
 * [ :rocket: Installation](#installation)
     * [Using pip](#using-pip)
     * [Package page](https://pypi.org/project/prompt-security-fuzzer/)
-    * [:construction: Using docker](#docker) ***coming soon*** 
+    * [:construction: Using docker](#docker) ***coming soon***
 * [Usage](#usage)
     * [Features](#features)
     * [Environment variables](#environment-variables)
@@ -76,7 +76,7 @@ Table of Contents
 <br>
 
 <a id="installation"></a>
-## 🚀 Installation 
+## 🚀 Installation
 ![prompt-fuzzer-install-final](https://github.com/prompt-security/ps-fuzz/assets/163823698/47daaeed-3fad-417e-b646-06753db427f4)
 
 1. Install the Fuzzer package
@@ -85,6 +85,19 @@ Table of Contents
    ```zsh
    pip install prompt-security-fuzzer
    ```
+
+   #### Using uv (system interpreter, no virtualenv)
+   ```zsh
+   uv pip install -e . --system
+   ```
+   This drops the `prompt-security-fuzzer` console script into the Python binary directory (for example `/Users/you/.proto/tools/python/3.11.14/bin`). Add that directory to your `PATH` (e.g. `export PATH="/Users/you/.proto/tools/python/3.11.14/bin:$PATH"`) so the CLI is available everywhere.
+
+   #### Using pipx (isolated CLI install)
+   ```zsh
+   pipx install --python python3.11 prompt-security-fuzzer
+   ```
+   Replace `python3.11` with any supported interpreter (3.7–3.11). To make this the default for future installs, set `PIPX_DEFAULT_PYTHON=python3.11` before running `pipx install`.
+
    <a id="using-pypi"></a>
    #### Using the package page on PyPi
    You can also visit the [package page](https://pypi.org/project/prompt-security-fuzzer/) on PyPi
@@ -94,7 +107,7 @@ Table of Contents
 2. Launch the Fuzzer
    ```zsh
    export OPENAI_API_KEY=sk-123XXXXXXXXXXXX
-   
+
    prompt-security-fuzzer
    ```
 
@@ -115,7 +128,7 @@ Table of Contents
 💬  Interactive mode<br>
 🤖  CLI mode<br>
 🧵  Multi threaded testing<br>
-  
+
 <a id="environment-variables"></a>
 ### Environment variables:
 
@@ -156,15 +169,15 @@ Alternatively, create a file named `.env` in the current directory and set the `
 ### Command line Options
 * `--list-providers`        Lists all available providers
 * `--list-attacks`          Lists available attacks and exit
-* `--attack-provider`       Attack Provider 
-* `--attack-model`          Attack Model  
+* `--attack-provider`       Attack Provider
+* `--attack-model`          Attack Model
 * `--target-provider `      Target provider
-* `--target-model`          Target model  
-* `--num-attempts, -n`       NUM_ATTEMPTS Number of different attack prompts 
-* `--num-threads, -t`        NUM_THREADS  Number of worker threads 
-* `--attack-temperature, -a` ATTACK_TEMPERATURE  Temperature for attack model 
-* `--debug-level, -d`        DEBUG_LEVEL  Debug level (0-2)   
-* `-batch, -b`               Run the fuzzer in unattended (batch) mode, bypassing the interactive steps 
+* `--target-model`          Target model
+* `--num-attempts, -n`       NUM_ATTEMPTS Number of different attack prompts
+* `--num-threads, -t`        NUM_THREADS  Number of worker threads
+* `--attack-temperature, -a` ATTACK_TEMPERATURE  Temperature for attack model
+* `--debug-level, -d`        DEBUG_LEVEL  Debug level (0-2)
+* `-batch, -b`               Run the fuzzer in unattended (batch) mode, bypassing the interactive steps
 
 <br/>
 
@@ -172,14 +185,14 @@ Alternatively, create a file named `.env` in the current directory and set the `
 ## Examples
 
 System prompt examples (of various strengths) can be found in the subdirectory [system_prompt.examples](https://github.com/prompt-security/ps-fuzz/tree/main/system_prompt.examples/) in the sources.
- 
+
 <a id="interactive"></a>
 #### Interactive mode (default mode)
 
   Run tests against the system prompt
 
 ```
-    prompt_security_fuzzer 
+    prompt_security_fuzzer
 ```
 
 <a id="singlerun"></a>
@@ -225,7 +238,7 @@ We use a dynamic testing approach, where we get the necessary context from your 
 
 <a id="jailbreak"></a>
 ##### Jailbreak
- 
+
 - **AIM Jailbreak**: Probes ethical compliance by eliciting instructions on illegal activities via Machiavelli roleplay.
 - **Affirmative Suffix**: Exploits a vulnerability to elicit affirmative responses for prohibited content.
 - **Amnesia**: Causes the LLM to forget or disregard system prompt instructions, leading to unrelated outputs.
@@ -278,4 +291,3 @@ Turn this into a community project! We want this to be useful to everyone buildi
 Interested in contributing to the development of our tools? Great! For a guide on making your first contribution, please see our [Contributing Guide](https://github.com/prompt-security/ps-fuzz/blob/main/CONTRIBUTING.md#get-started-with-your-first-contribution-adding-a-new-test). This section offers a straightforward introduction to adding new tests.
 
 For ideas on what tests to add, check out the issues tab in our GitHub repository. Look for issues labeled `new-test` and `good-first-issue`, which are perfect starting points for new contributors.
-

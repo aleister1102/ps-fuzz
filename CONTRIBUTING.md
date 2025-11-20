@@ -128,8 +128,12 @@ from ..attack_config import AttackConfig
 from ..test_base import TestBase, StatusUpdate
 from ..attack_registry import register_test
 from typing import Generator
-from pkg_resources import resource_filename
 import logging
+ 
+try:
+    from importlib.resources import as_file, files
+except ImportError:
+    from importlib_resources import as_file, files  # Python < 3.9
 logger = logging.getLogger(__name__)
 ```
 
